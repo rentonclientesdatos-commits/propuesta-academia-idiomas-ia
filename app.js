@@ -191,18 +191,19 @@ function initRoiCalculator() {
     const totalHorasMes = horasMesPorPersona * participantes;
     const ahorroMonetarioMes = totalHorasMes * valorHora;
 
-    totalHorasMesEl.textContent = `${totalHorasMes} hrs`;
-    totalAhorroMesEl.textContent = '$' + ahorroMonetarioMes.toLocaleString('es-CL') + ' CLP';
+    totalHorasMesEl.textContent = `${totalHorasMes} hrs/mes`;
+    totalAhorroMesEl.textContent = '$' + ahorroMonetarioMes.toLocaleString('es-CL') + ' CLP/mes';
 
-    // Tiempo de recuperación de los $600.000 CLP
-    if (ahorroMonetarioMes >= COSTO_CURSO) {
-      const dias = Math.round((COSTO_CURSO / ahorroMonetarioMes) * 30);
-      tiempoRetornoEl.textContent = `~${dias} Días (Retorno Inmediato)`;
-      tiempoRetornoEl.style.color = '#34d399';
-    } else {
+    // Tiempo de recuperación realista de la inversión ($600.000 CLP)
+    if (ahorroMonetarioMes > 0) {
       const meses = (COSTO_CURSO / ahorroMonetarioMes).toFixed(1);
-      tiempoRetornoEl.textContent = `${meses} Meses`;
-      tiempoRetornoEl.style.color = '#fbbf24';
+      if (meses <= 1) {
+        tiempoRetornoEl.textContent = `~${Math.round(meses * 4)} Semanas`;
+        tiempoRetornoEl.style.color = '#34d399';
+      } else {
+        tiempoRetornoEl.textContent = `~${meses} Meses`;
+        tiempoRetornoEl.style.color = '#fbbf24';
+      }
     }
   }
 
