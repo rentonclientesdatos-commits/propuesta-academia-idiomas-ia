@@ -647,17 +647,32 @@ body {
 }
 
 .instructor-avatar-badge {
-  width: 58px;
-  height: 58px;
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 84px;
+  height: 84px;
   border-radius: var(--border-radius);
+  border: 2.5px solid var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  color: #ffffff;
+  background: #080c14;
   flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.instructor-avatar-badge:hover {
+  transform: scale(1.04);
+  border-color: #38bdf8;
+  box-shadow: 0 0 28px rgba(6, 182, 212, 0.6), 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.instructor-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
 .instructor-identity h3 {
@@ -1096,6 +1111,120 @@ body {
 /* ==========================================================================
    MALLA CURRICULAR Y TIMELINE PASO A PASO (CUADRADA)
    ========================================================================== */
+/* Selector Principal de Meses (2 Meses) */
+.month-selector-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius);
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.month-selector-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--accent-cyan);
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.month-tabs {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr 1.5fr;
+  gap: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .month-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.month-tab-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-sm);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.month-tab-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.month-tab-btn.active {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.m-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.month-tab-btn.active .m-badge {
+  color: #ffffff;
+}
+
+.m-badge.month-1-badge {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan);
+}
+
+.m-badge.month-2-badge {
+  background: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+}
+
+.m-name {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.w-month-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-bottom: 0.3rem;
+  width: fit-content;
+}
+
+.w-month-tag.month-2 {
+  background: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+}
+
 .weeks-nav-container {
   display: flex;
   gap: 0.6rem;
@@ -1984,83 +2113,461 @@ body.meeting-mode .session-name {
 }
 
 /* ==========================================================================
-   PRINT MEDIA QUERY (PDF LIMPIO)
+   PRINT MEDIA QUERY (PDF EJECUTIVO COMPLETO DE 2 MESES)
    ========================================================================== */
 @media print {
-  body {
-    background: #ffffff !important;
-    color: #1e293b !important;
-    font-size: 11pt;
+  @page {
+    size: letter;
+    margin: 1.2cm 1cm 1.2cm 1cm;
   }
 
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    overflow: visible !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Evitar cualquier truncamiento por overflow */
+  main, section, .section-container, .container, .curriculum-timeline-wrapper {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+    padding: 0.8rem 0 !important;
+    background: none !important;
+  }
+
+  /* Ocultar elementos interactivos, botones y fondos innecesarios */
   .top-announcement-bar,
   .main-header,
   .hero-cta-group,
-  .tabs-comparison,
+  .month-selector-bar,
   .weeks-nav-container,
+  .tabs-comparison,
   .pricing-actions,
-  .slider-group input,
+  .slider-group,
+  .roi-controls,
   .modal-backdrop,
   .toast-notification,
   .btn,
-  .hero-bg-glow {
+  .hero-bg-glow,
+  .btn-close-banner {
     display: none !important;
+    visibility: hidden !important;
   }
 
   .container {
     max-width: 100% !important;
+    width: 100% !important;
     padding: 0 !important;
   }
 
+  /* Header impreso limpio */
   .hero-section {
-    padding: 1rem 0 !important;
+    padding: 0.5rem 0 1.5rem !important;
     background: none !important;
+    page-break-after: avoid;
+  }
+
+  .hero-meta-strip {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.3rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .pill-meta {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 8pt !important;
+    padding: 0.15rem 0.5rem !important;
   }
 
   .hero-title {
     color: #0f172a !important;
-    font-size: 20pt !important;
+    font-size: 18pt !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .gradient-text {
     background: none !important;
-    -webkit-text-fill-color: #0369a1 !important;
-    color: #0369a1 !important;
+    -webkit-text-fill-color: #0284c7 !important;
+    color: #0284c7 !important;
   }
 
+  .hero-lead {
+    color: #334155 !important;
+    font-size: 10pt !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Banner Google AI Plus & CORFO */
   .promo-box-gold {
-    background: #fef3c7 !important;
-    border: 2px solid #d97706 !important;
+    background: #fffbeb !important;
+    border: 2px solid #f59e0b !important;
     color: #78350f !important;
     box-shadow: none !important;
+    padding: 0.8rem 1rem !important;
+    margin-bottom: 1.2rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .promo-box-gold h3 {
     color: #92400e !important;
+    font-size: 10pt !important;
+  }
+
+  .promo-box-gold p {
+    color: #78350f !important;
+    font-size: 9pt !important;
   }
 
   .gold-badge {
     background: #d97706 !important;
     color: #ffffff !important;
+    font-size: 8pt !important;
   }
 
-  .spec-card, .pillar-card, .session-card, .feature-box, .pricing-card, .instructor-main-card, .highlight-bento-box {
+  /* Bento Grid Specs */
+  .specs-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.6rem !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .spec-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 0.6rem 0.8rem !important;
+    color: #0f172a !important;
+  }
+
+  .spec-label { color: #64748b !important; font-size: 7.5pt !important; }
+  .spec-value { color: #0f172a !important; font-size: 11pt !important; font-weight: 800 !important; }
+  .spec-sub { color: #64748b !important; font-size: 7.5pt !important; }
+  .spec-icon { color: #0284c7 !important; }
+
+  /* Relator / Instructor */
+  .instructor-bento-grid {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr !important;
+    gap: 1rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .instructor-main-card, .highlight-bento-box {
     background: #f8fafc !important;
     border: 1px solid #cbd5e1 !important;
     color: #0f172a !important;
-    box-shadow: none !important;
+    padding: 0.9rem !important;
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
-  .session-name, .pillar-card h3, .spec-value, .price-value, .instructor-identity h3 {
-    color: #0f172a !important;
+  .instructor-identity h3 { color: #0f172a !important; font-size: 12pt !important; }
+  .instructor-role { color: #0284c7 !important; font-size: 8.5pt !important; }
+  .instructor-bio { color: #334155 !important; font-size: 8.5pt !important; }
+  .instructor-avatar-badge {
+    width: 68px !important;
+    height: 68px !important;
+    border: 1.5px solid #0284c7 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    flex-shrink: 0 !important;
+  }
+  .instructor-photo {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+  }
+  .inst-pill {
+    background: #e2e8f0 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    font-size: 7.5pt !important;
+  }
+
+  /* Malla Curricular: FORZAR TODAS LAS 8 SEMANAS Y 16 SESIONES */
+  #flujo-tiempo {
+    page-break-before: always;
+    overflow: visible !important;
+  }
+
+  .curriculum-timeline-wrapper {
+    display: block !important;
+    overflow: visible !important;
   }
 
   .week-block {
     display: block !important;
-    page-break-inside: avoid;
-    margin-bottom: 1.5rem;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
+
+  .week-header-bar {
+    background: #e0f2fe !important;
+    border-left: 4px solid #0284c7 !important;
+    border-radius: 4px !important;
+    padding: 0.7rem 1rem !important;
+    margin-bottom: 0.8rem !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid;
+  }
+
+  .w-badge-tag {
+    font-size: 7.5pt !important;
+    padding: 0.15rem 0.4rem !important;
+    font-weight: 800 !important;
+  }
+
+  .w-badge-tag.basic { background: #dbeafe !important; color: #1e40af !important; }
+  .w-badge-tag.intermediate { background: #cffafe !important; color: #0e7490 !important; }
+  .w-badge-tag.advanced { background: #ede9fe !important; color: #5b21b6 !important; }
+  .w-badge-tag.expert { background: #d1fae5 !important; color: #065f46 !important; }
+
+  .week-header-bar h3 {
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .week-header-bar p {
+    color: #475569 !important;
+    font-size: 8.5pt !important;
+    margin: 0 !important;
+  }
+
+  /* Grilla de Sesiones */
+  .sessions-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.8rem !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .session-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    padding: 0.85rem !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .session-card:hover { border-color: #cbd5e1 !important; }
+
+  .session-num {
+    color: #0369a1 !important;
+    font-size: 8.5pt !important;
+    font-weight: 800 !important;
+  }
+
+  .pill-type {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    font-size: 7pt !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .session-name {
+    color: #0f172a !important;
+    font-size: 9.5pt !important;
+    font-weight: 700 !important;
+    margin: 0.4rem 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  .session-what-learn {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .sub-label {
+    font-size: 7.5pt !important;
+    color: #0284c7 !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .learning-points {
+    padding-left: 1rem !important;
+    margin: 0 !important;
+  }
+
+  .learning-points li {
+    font-size: 8pt !important;
+    color: #334155 !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .learning-points li strong {
+    color: #0f172a !important;
+  }
+
+  .session-tools-tags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.3rem !important;
+    margin: 0.4rem 0 !important;
+  }
+
+  .tool-tag {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+    font-size: 7pt !important;
+    padding: 0.1rem 0.35rem !important;
+  }
+
+  .session-deliverable {
+    background: #f8fafc !important;
+    border: 1px dashed #94a3b8 !important;
+    color: #0f172a !important;
+    font-size: 7.5pt !important;
+    padding: 0.4rem 0.6rem !important;
+    border-radius: 4px !important;
+    margin-top: auto !important;
+  }
+
+  .session-deliverable i {
+    color: #059669 !important;
+  }
+
+  /* Sección CORFO y Proyectos */
+  #corfo-innovacion {
+    page-break-before: always;
+  }
+
+  .corfo-advisory-banner {
+    background: #fffbeb !important;
+    border: 1px solid #f59e0b !important;
+    color: #0f172a !important;
+    padding: 1rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .corfo-lead-text { color: #334155 !important; font-size: 8.5pt !important; }
+
+  .corfo-steps-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .corfo-step-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 0.6rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .corfo-step-card h4 { color: #0f172a !important; font-size: 8.5pt !important; }
+  .corfo-step-card p { color: #475569 !important; font-size: 7.5pt !important; }
+
+  .corfo-projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.8rem !important;
+  }
+
+  .corfo-project-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .corfo-project-title { color: #0f172a !important; font-size: 10pt !important; }
+  .corfo-project-subtitle { color: #0284c7 !important; font-size: 8pt !important; }
+  .corfo-section-block p { color: #334155 !important; font-size: 8pt !important; }
+  .corfo-deliverables-list li { color: #475569 !important; font-size: 7.5pt !important; }
+  .corfo-metric-bar { background: #f8fafc !important; border-color: #cbd5e1 !important; }
+  .corfo-metric-val { color: #d97706 !important; }
+
+  /* Cotización Económica */
+  #cotizacion {
+    page-break-before: always;
+  }
+
+  .pricing-cards-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1.3fr !important;
+    gap: 1rem !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .pricing-card {
+    background: #ffffff !important;
+    border: 2px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .pricing-card.featured {
+    border-color: #0284c7 !important;
+    background: #f0f9ff !important;
+  }
+
+  .featured-badge {
+    background: #0284c7 !important;
+    color: #ffffff !important;
+    font-size: 7.5pt !important;
+  }
+
+  .pricing-label { color: #64748b !important; font-size: 7.5pt !important; }
+  .price-value { color: #0f172a !important; font-size: 18pt !important; }
+  .price-desc { color: #475569 !important; font-size: 8pt !important; }
+  .pricing-checklist li { color: #334155 !important; font-size: 8pt !important; }
+  .pricing-checklist li strong { color: #0f172a !important; }
+  .pricing-calculator-note { background: #e0f2fe !important; border-color: #bae6fd !important; }
+  .calc-row span { color: #475569 !important; }
+  .calc-row strong { color: #0369a1 !important; }
+
+  /* Footer */
+  .main-footer {
+    border-top: 1px solid #cbd5e1 !important;
+    padding: 1.5rem 0 !important;
+    color: #64748b !important;
+    font-size: 8pt !important;
+    background: none !important;
+    page-break-before: avoid;
+  }
+
+  .footer-brand span { color: #0f172a !important; }
+  .footer-left p { color: #475569 !important; }
+  .footer-right .copy { color: #64748b !important; }
+  .footer-right .quick-links { display: none !important; }
 }
 
 /* ==========================================================================

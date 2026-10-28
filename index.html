@@ -53,7 +53,7 @@
         <button class="btn btn-outline" id="btnModoPresentacion" title="Modo Presentación para Proyector o Directorio">
           <i class="fa-solid fa-tv"></i> <span>Modo Reunión</span>
         </button>
-        <button class="btn btn-primary" onclick="window.print()" title="Imprimir propuesta en formato PDF ejecutivo">
+        <button class="btn btn-primary" onclick="descargarPDF()" title="Imprimir o guardar propuesta completa en PDF">
           <i class="fa-solid fa-file-pdf"></i> <span>Descargar PDF</span>
         </button>
       </div>
@@ -69,8 +69,8 @@
       <div class="container hero-container">
         <!-- Metadata Strip -->
         <div class="hero-meta-strip">
-          <span class="pill-meta"><i class="fa-solid fa-calendar-check"></i> Octubre 2026</span>
-          <span class="pill-meta highlight-cyan"><i class="fa-solid fa-building-columns"></i> Presentado a: Academia de Idiomas del Norte</span>
+          <span class="pill-meta highlight-cyan"><i class="fa-solid fa-calendar-check"></i> Octubre - Noviembre 2026 (2 Meses)</span>
+          <span class="pill-meta"><i class="fa-solid fa-building-columns"></i> Presentado a: Academia de Idiomas del Norte</span>
           <span class="pill-meta"><i class="fa-solid fa-users-gear"></i> Equipo Directivo y Administrativo</span>
           <span class="pill-meta highlight-corfo"><i class="fa-solid fa-handshake-angle"></i> Incluye Asesoría CORFO</span>
           <span class="pill-meta highlight-instructor"><i class="fa-solid fa-user-check"></i> Relator: Renzo Thompson</span>
@@ -82,7 +82,7 @@
         </h1>
 
         <p class="hero-lead">
-          Programa práctico <em>Hands-On</em> de <strong>2 meses (32 Horas Cronológicas)</strong> diseñado para transformar la productividad de tu equipo, automatizar tareas burocráticas y convertir horas de trabajo manual en minutos de análisis estratégico.
+          Programa práctico <em>Hands-On</em> de <strong>2 meses completos (8 Semanas · 32 Horas Cronológicas / 16 Sesiones)</strong> diseñado para transformar la productividad de tu equipo, automatizar tareas burocráticas y convertir horas de trabajo manual en minutos de análisis estratégico.
         </p>
 
         <!-- Golden Google AI Plus Box -->
@@ -101,11 +101,11 @@
         <!-- Quick Spec Cards Bento Grid -->
         <div class="specs-grid">
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="spec-icon"><i class="fa-solid fa-calendar-days"></i></div>
             <div class="spec-info">
               <span class="spec-label">Duración Total</span>
-              <span class="spec-value">32 Horas</span>
-              <span class="spec-sub">8 semanas · 4 hrs/semana</span>
+              <span class="spec-value">2 Meses</span>
+              <span class="spec-sub">8 semanas · 16 clases de 2 hrs</span>
             </div>
           </div>
 
@@ -171,7 +171,7 @@
           <div class="instructor-main-card">
             <div class="instructor-header-row">
               <div class="instructor-avatar-badge">
-                <i class="fa-solid fa-user-astronaut"></i>
+                <img src="renzo-thompson.jpg" alt="Renzo Thompson Calderón - Relator y Arquitecto de Soluciones IA" class="instructor-photo">
               </div>
               <div class="instructor-identity">
                 <h3>Renzo Thompson C.</h3>
@@ -364,36 +364,85 @@
           <span class="section-tag">MALLA CURRICULAR DETALLADA</span>
           <h2 class="section-title">Flujo de Aprendizaje Paso a Paso (32 Horas)</h2>
           <p class="section-description">
-            Ruta formativa estructurada en 4 semanas / 8 sesiones: desde los cimientos y el prompting ejecutivo, hasta la creación de agentes corporativos y el blindaje en ciberseguridad.
+            Ruta formativa estructurada en 8 semanas / 16 sesiones (2 clases de 2 hrs por semana): desde los cimientos y el prompting ejecutivo, hasta automatización avanzada, análisis de datos, integraciones y el proyecto final certificado.
           </p>
         </div>
 
-        <!-- Filtro de Semanas -->
+        <!-- Selector Principal de Meses (2 Meses / 8 Semanas) -->
+        <div class="month-selector-bar">
+          <div class="month-selector-title">
+            <i class="fa-solid fa-calendar-days"></i> <span>ESTRUCTURA DE LOS 2 MESES DE FORMACIÓN:</span>
+          </div>
+          <div class="month-tabs">
+            <button class="month-tab-btn active" data-month="all">
+              <span class="m-badge">VISTA GLOBAL</span>
+              <span class="m-name">Programa Completo de 2 Meses (8 Semanas · 16 Sesiones)</span>
+            </button>
+            <button class="month-tab-btn" data-month="1">
+              <span class="m-badge month-1-badge"><i class="fa-solid fa-calendar"></i> MES 1 · OCTUBRE</span>
+              <span class="m-name">Fundamentos, Documentos & Planillas (Semanas 1 a 4 · 16 hrs)</span>
+            </button>
+            <button class="month-tab-btn" data-month="2">
+              <span class="m-badge month-2-badge"><i class="fa-solid fa-calendar-check"></i> MES 2 · NOVIEMBRE</span>
+              <span class="m-name">Asistentes, Dashboards, Ciberseguridad & Certificación (Semanas 5 a 8 · 16 hrs)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtro de Semanas Individuales -->
         <div class="weeks-nav-container">
-          <button class="week-nav-btn active" data-week="1">
+          <button class="week-nav-btn active" data-week="1" data-month="1">
+            <span class="w-month-tag">MES 1</span>
             <span class="w-num">SEMANA 1</span>
             <span class="w-level">Nivel Básico</span>
             <span class="w-title">Fundamentos & Prompting</span>
           </button>
-          <button class="week-nav-btn" data-week="2">
+          <button class="week-nav-btn" data-week="2" data-month="1">
+            <span class="w-month-tag">MES 1</span>
             <span class="w-num">SEMANA 2</span>
+            <span class="w-level">Nivel Básico+</span>
+            <span class="w-title">Prompting Avanzado</span>
+          </button>
+          <button class="week-nav-btn" data-week="3" data-month="1">
+            <span class="w-month-tag">MES 1</span>
+            <span class="w-num">SEMANA 3</span>
             <span class="w-level">Nivel Intermedio</span>
             <span class="w-title">Documentos & Planillas</span>
           </button>
-          <button class="week-nav-btn" data-week="3">
-            <span class="w-num">SEMANA 3</span>
-            <span class="w-level">Nivel Avanzado</span>
-            <span class="w-title">Reportes & Agentes GPT</span>
-          </button>
-          <button class="week-nav-btn" data-week="4">
+          <button class="week-nav-btn" data-week="4" data-month="1">
+            <span class="w-month-tag">MES 1</span>
             <span class="w-num">SEMANA 4</span>
-            <span class="w-level">Nivel Experto</span>
-            <span class="w-title">Ciberseguridad & Reto Final</span>
+            <span class="w-level">Nivel Intermedio+</span>
+            <span class="w-title">Reuniones & Análisis</span>
           </button>
-          <button class="week-nav-btn view-all-btn" data-week="all">
+          <button class="week-nav-btn" data-week="5" data-month="2">
+            <span class="w-month-tag month-2">MES 2</span>
+            <span class="w-num">SEMANA 5</span>
+            <span class="w-level">Nivel Avanzado</span>
+            <span class="w-title">Reportes & Presentaciones</span>
+          </button>
+          <button class="week-nav-btn" data-week="6" data-month="2">
+            <span class="w-month-tag month-2">MES 2</span>
+            <span class="w-num">SEMANA 6</span>
+            <span class="w-level">Nivel Avanzado+</span>
+            <span class="w-title">Agentes GPT & Dashboards</span>
+          </button>
+          <button class="week-nav-btn" data-week="7" data-month="2">
+            <span class="w-month-tag month-2">MES 2</span>
+            <span class="w-num">SEMANA 7</span>
+            <span class="w-level">Nivel Experto</span>
+            <span class="w-title">Ciberseguridad & Privacidad</span>
+          </button>
+          <button class="week-nav-btn" data-week="8" data-month="2">
+            <span class="w-month-tag month-2">MES 2</span>
+            <span class="w-num">SEMANA 8</span>
+            <span class="w-level">Nivel Experto+</span>
+            <span class="w-title">Reto Final & Certificación</span>
+          </button>
+          <button class="week-nav-btn view-all-btn" data-week="all" data-month="all">
             <span class="w-num"><i class="fa-solid fa-arrows-split-up-and-left"></i></span>
             <span class="w-level">Vista Completa</span>
-            <span class="w-title">Ver Malla 8 Sesiones</span>
+            <span class="w-title">Ver 8 Semanas</span>
           </button>
         </div>
 
@@ -401,9 +450,9 @@
         <div class="curriculum-timeline-wrapper" id="curriculumWrapper">
           
           <!-- SEMANA 1 -->
-          <div class="week-block" id="week-1" data-week-index="1">
+          <div class="week-block" id="week-1" data-week-index="1" data-month="1">
             <div class="week-header-bar">
-              <div class="w-badge-tag basic">NIVEL BÁSICO · SEMANA 1 (4 HORAS)</div>
+              <div class="w-badge-tag basic"><i class="fa-solid fa-calendar"></i> MES 1 · SEMANA 1 (4 HRS · Sesiones 1 & 2)</div>
               <h3>Fundamentos, Cerebros de la IA y Prompting Básico</h3>
               <p>Desmitificar la IA, entender la arquitectura de los modelos y dominar la fórmula para obtener respuestas profesionales a la primera.</p>
             </div>
@@ -472,11 +521,11 @@
           </div>
 
           <!-- SEMANA 2 -->
-          <div class="week-block" id="week-2" data-week-index="2">
+          <div class="week-block" id="week-2" data-week-index="2" data-month="1">
             <div class="week-header-bar">
-              <div class="w-badge-tag intermediate">NIVEL INTERMEDIO · SEMANA 2 (4 HORAS)</div>
-              <h3>Gestión Documental, Automatización de Reuniones y Hojas de Cálculo</h3>
-              <p>Acelerar el procesamiento de información densa: contratos, licitaciones, actas de reuniones y fórmulas analíticas en planillas.</p>
+              <div class="w-badge-tag basic"><i class="fa-solid fa-calendar"></i> MES 1 · SEMANA 2 (4 HRS · Sesiones 3 & 4)</div>
+              <h3>Prompting Avanzado, Memoria Conversacional y Flujos Multi-Paso</h3>
+              <p>Dominar técnicas de prompting de nivel profesional: cadenas de razonamiento, control de temperatura, memoria de contexto y automatización de flujos complejos de trabajo.</p>
             </div>
 
             <div class="sessions-grid">
@@ -484,9 +533,78 @@
               <div class="session-card">
                 <div class="session-top">
                   <span class="session-num">Sesión 3 · 2 Horas</span>
+                  <span class="pill-type">Chain-of-Thought</span>
+                </div>
+                <h4 class="session-name">Técnicas Avanzadas de Prompting y Razonamiento Estructurado</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li><strong>Chain-of-Thought Prompting:</strong> Obligar al modelo a razonar paso a paso para resolver problemas complejos.</li>
+                    <li>Técnica <em>Tree of Thoughts</em>: explorar múltiples caminos de solución antes de decidir la respuesta final.</li>
+                    <li>Control de <strong>temperatura y creatividad</strong>: cuándo necesitar respuestas determinísticas vs. creativas.</li>
+                    <li>Construcción de <strong>System Prompts corporativos</strong> robustos con reglas de negocio inviolables.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-brain"></i> Chain-of-Thought</span>
+                  <span class="tool-tag"><i class="fa-solid fa-sliders"></i> Parámetros Avanzados</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Biblioteca de prompts avanzados para 5 procesos críticos de la organización.</span>
+                </div>
+              </div>
+
+              <!-- Sesión 4 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 4 · 2 Horas</span>
+                  <span class="pill-type">Flujos Multi-Paso</span>
+                </div>
+                <h4 class="session-name">Memoria Conversacional y Automatización de Flujos Multi-Paso</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li>Gestión de <strong>contexto y memoria</strong>: cómo mantener coherencia en conversaciones largas sin perder el hilo.</li>
+                    <li>Diseño de <strong>flujos de trabajo multi-paso</strong>: encadenar tareas donde la salida de una es la entrada de la siguiente.</li>
+                    <li>Uso de <strong>variables y plantillas dinámicas</strong> para personalizar automáticamente documentos en masa.</li>
+                    <li>Construcción de un pipeline completo: desde datos brutos hasta informe ejecutivo en 3 pasos automáticos.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-diagram-project"></i> Flujos Multi-Paso</span>
+                  <span class="tool-tag"><i class="fa-solid fa-memory"></i> Gestión de Contexto</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Pipeline automatizado de 3 pasos para producir reportes semanales de gestión.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEMANA 3 -->
+          <div class="week-block" id="week-3" data-week-index="3" data-month="1">
+            <div class="week-header-bar">
+              <div class="w-badge-tag intermediate"><i class="fa-solid fa-calendar"></i> MES 1 · SEMANA 3 (4 HRS · Sesiones 5 & 6)</div>
+              <h3>Gestión Documental Inteligente: PDFs, Contratos y Licitaciones</h3>
+              <p>Acelerar el procesamiento de información densa: auditorías de contratos extensos, extracción de cláusulas clave y control de alucinaciones con verificación cruzada.</p>
+            </div>
+
+            <div class="sessions-grid">
+              <!-- Sesión 5 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 5 · 2 Horas</span>
                   <span class="pill-type">Análisis Documental</span>
                 </div>
-                <h4 class="session-name">Procesamiento Inteligente de Documentos Extensos</h4>
+                <h4 class="session-name">Procesamiento Inteligente de Documentos Extensos y Contratos</h4>
                 
                 <div class="session-what-learn">
                   <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
@@ -509,53 +627,82 @@
                 </div>
               </div>
 
-              <!-- Sesión 4 -->
+              <!-- Sesión 6 -->
               <div class="session-card">
                 <div class="session-top">
-                  <span class="session-num">Sesión 4 · 2 Horas</span>
-                  <span class="pill-type">Reuniones & Excel</span>
+                  <span class="session-num">Sesión 6 · 2 Horas</span>
+                  <span class="pill-type">Planillas & Datos</span>
                 </div>
-                <h4 class="session-name">Automatización de Reuniones y Planillas de Cálculo</h4>
+                <h4 class="session-name">Automatización de Planillas de Cálculo y Análisis de Datos con IA</h4>
                 
                 <div class="session-what-learn">
                   <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
                   <ul class="learning-points">
-                    <li>Conversión automática de audios de reuniones en <strong>Minutas Estructuradas</strong> (Acuerdos, Fechas y Responsables).</li>
                     <li>Generar fórmulas avanzadas de Excel/Sheets (<code>BUSCARX</code>, <code>FILTER</code>, <code>QUERY</code>) describiéndolas en español cotidiano.</li>
                     <li>Detección de inconsistencias, duplicados y anomalías en bases de datos operativas.</li>
                     <li>Análisis descriptivo: "¿Qué departamento tuvo mayor atraso en despachos este mes?".</li>
+                    <li>Creación de <strong>macros y scripts básicos</strong> en Google Apps Script dictados en lenguaje natural.</li>
                   </ul>
                 </div>
 
                 <div class="session-tools-tags">
                   <span class="tool-tag"><i class="fa-solid fa-file-excel"></i> Excel / Google Sheets</span>
-                  <span class="tool-tag"><i class="fa-solid fa-microphone-lines"></i> Transcripción IA</span>
+                  <span class="tool-tag"><i class="fa-solid fa-code"></i> Apps Script</span>
                 </div>
 
                 <div class="session-deliverable">
                   <i class="fa-solid fa-folder-check"></i>
-                  <span><strong>Entregable Práctico:</strong> Minuta ejecutiva completa generada a partir de audio y planilla analizada con IA.</span>
+                  <span><strong>Entregable Práctico:</strong> Planilla analítica automatizada con fórmulas avanzadas para control de gestión mensual.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- SEMANA 3 -->
-          <div class="week-block" id="week-3" data-week-index="3">
+          <!-- SEMANA 4 -->
+          <div class="week-block" id="week-4" data-week-index="4" data-month="1">
             <div class="week-header-bar">
-              <div class="w-badge-tag advanced">NIVEL AVANZADO · SEMANA 3 (4 HORAS)</div>
-              <h3>Creación Acelerada de Reportes y Asistentes Personalizados (Custom GPTs)</h3>
-              <p>Dar el salto de usuarios a creadores: diseñar presentaciones ejecutivas y bots inteligentes entrenados con las reglas de la empresa.</p>
+              <div class="w-badge-tag intermediate"><i class="fa-solid fa-calendar"></i> MES 1 · SEMANA 4 (4 HRS · Sesiones 7 & 8)</div>
+              <h3>Automatización de Reuniones y Reportes Ejecutivos Acelerados</h3>
+              <p>Convertir audios de reuniones en minutas estructuradas automáticamente y generar presentaciones ejecutivas de impacto en minutos con herramientas IA.</p>
             </div>
 
             <div class="sessions-grid">
-              <!-- Sesión 5 -->
+              <!-- Sesión 7 -->
               <div class="session-card">
                 <div class="session-top">
-                  <span class="session-num">Sesión 5 · 2 Horas</span>
+                  <span class="session-num">Sesión 7 · 2 Horas</span>
+                  <span class="pill-type">Reuniones & Minuta IA</span>
+                </div>
+                <h4 class="session-name">Automatización de Reuniones: Transcripción, Minutas y Actas con IA</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li>Conversión automática de audios de reuniones en <strong>Minutas Estructuradas</strong> (Acuerdos, Fechas y Responsables).</li>
+                    <li>Herramientas de <strong>transcripción en tiempo real</strong>: Whisper, Google Meet AI, Otter.ai y alternativas gratuitas.</li>
+                    <li>Post-procesamiento inteligente: clasificar acuerdos por urgencia, asignar responsables y generar seguimiento automático.</li>
+                    <li>Integración directa con Google Calendar y correo para envío automático de actas.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-microphone-lines"></i> Whisper / Otter.ai</span>
+                  <span class="tool-tag"><i class="fa-solid fa-calendar-check"></i> Google Meet AI</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Minuta ejecutiva completa generada a partir de audio de reunión real con seguimiento automático.</span>
+                </div>
+              </div>
+
+              <!-- Sesión 8 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 8 · 2 Horas</span>
                   <span class="pill-type">Presentaciones & Visual</span>
                 </div>
-                <h4 class="session-name">Generación Acelerada de Reportes y Presentaciones</h4>
+                <h4 class="session-name">Generación Acelerada de Reportes y Presentaciones Ejecutivas</h4>
                 
                 <div class="session-what-learn">
                   <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
@@ -563,26 +710,37 @@
                     <li>Estructurar memorandums directivos con formato visualmente atractivo y jerarquía clara.</li>
                     <li>Crear presentaciones ejecutivas completas en minutos con herramientas IA (Gamma, Canva AI, Copilot).</li>
                     <li>Generación de imágenes y diagramas explicativos para enriquecer reportes institucionales sin infringir derechos.</li>
-                    <li>Exportación lista para proyección ante directorio o asamblea.</li>
+                    <li>Exportación lista para proyección ante directorio o asamblea de apoderados.</li>
                   </ul>
                 </div>
 
                 <div class="session-tools-tags">
                   <span class="tool-tag"><i class="fa-solid fa-file-powerpoint"></i> Gamma App / PowerPoint</span>
-                  <span class="tool-tag"><i class="fa-solid fa-palette"></i> Generación Gráfica</span>
+                  <span class="tool-tag"><i class="fa-solid fa-palette"></i> Canva AI</span>
                 </div>
 
                 <div class="session-deliverable">
                   <i class="fa-solid fa-folder-check"></i>
-                  <span><strong>Entregable Práctico:</strong> Presentación corporativa de 8 diapositivas diseñada en menos de 15 minutos.</span>
+                  <span><strong>Entregable Práctico:</strong> Presentación corporativa de 8 diapositivas diseñada y lista en menos de 15 minutos.</span>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <!-- Sesión 6 -->
+          <!-- SEMANA 5 -->
+          <div class="week-block" id="week-5" data-week-index="5" data-month="2">
+            <div class="week-header-bar">
+              <div class="w-badge-tag advanced"><i class="fa-solid fa-calendar-check"></i> MES 2 · SEMANA 5 (4 HRS · Sesiones 9 & 10)</div>
+              <h3>Creación de Asistentes Personalizados y Agentes GPT Corporativos</h3>
+              <p>Dar el salto de usuarios a creadores: diseñar bots inteligentes entrenados con las reglas, manuales y normativas internas de la organización.</p>
+            </div>
+
+            <div class="sessions-grid">
+              <!-- Sesión 9 -->
               <div class="session-card">
                 <div class="session-top">
-                  <span class="session-num">Sesión 6 · 2 Horas</span>
-                  <span class="pill-type">Bots & Agentes</span>
+                  <span class="session-num">Sesión 9 · 2 Horas</span>
+                  <span class="pill-type">Custom GPTs & Gems</span>
                 </div>
                 <h4 class="session-name">Creación de Asistentes Personalizados / Custom GPTs</h4>
                 
@@ -607,33 +765,131 @@
                   <span><strong>Entregable Práctico:</strong> Un Asistente Virtual privado funcionando con el reglamento interno de la organización.</span>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- SEMANA 4 -->
-          <div class="week-block" id="week-4" data-week-index="4">
-            <div class="week-header-bar">
-              <div class="w-badge-tag expert">NIVEL EXPERTO · SEMANA 4 (4 HORAS)</div>
-              <h3>Ciberseguridad, Privacidad, Ética y Proyecto Final Integrado</h3>
-              <p>Blindar los datos corporativos y demostrar el dominio total resolviendo un caso administrativo completo en tiempo real.</p>
-            </div>
-
-            <div class="sessions-grid">
-              <!-- Sesión 7 -->
+              <!-- Sesión 10 -->
               <div class="session-card">
                 <div class="session-top">
-                  <span class="session-num">Sesión 7 · 2 Horas</span>
-                  <span class="pill-type">Ciberseguridad & Privacidad</span>
+                  <span class="session-num">Sesión 10 · 2 Horas</span>
+                  <span class="pill-type">Flujos & Notifai</span>
                 </div>
-                <h4 class="session-name">Ciberseguridad, Privacidad y Uso Ético Corporativo</h4>
+                <h4 class="session-name">Automatización de Procesos sin Código con IA (No-Code Workflows)</h4>
                 
                 <div class="session-what-learn">
                   <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
                   <ul class="learning-points">
-                    <li><strong>Matriz de Sensibilidad de Datos:</strong> Semáforo de qué información es segura y qué datos personales o financieros jamás subir.</li>
+                    <li>Introducción a plataformas <strong>No-Code de automatización</strong>: Make (Integromat), Zapier y n8n para automatizar tareas repetitivas.</li>
+                    <li>Conexión de IA con herramientas del trabajo diario: Gmail, Google Drive, Sheets, WhatsApp Business.</li>
+                    <li>Diseño de un flujo que <strong>clasifica correos entrantes</strong> automáticamente y genera respuestas borradores.</li>
+                    <li>Alertas inteligentes: notificaciones automáticas cuando se detectan patrones críticos en documentos.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-diagram-project"></i> Make / Zapier</span>
+                  <span class="tool-tag"><i class="fa-brands fa-whatsapp"></i> WhatsApp API</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Flujo automatizado activo que procesa correos entrantes y genera respuestas con IA.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEMANA 6 -->
+          <div class="week-block" id="week-6" data-week-index="6" data-month="2">
+            <div class="week-header-bar">
+              <div class="w-badge-tag advanced"><i class="fa-solid fa-calendar-check"></i> MES 2 · SEMANA 6 (4 HRS · Sesiones 11 & 12)</div>
+              <h3>Análisis de Datos Avanzado, Dashboards IA y Toma de Decisiones Basada en Datos</h3>
+              <p>Transformar datos brutos en inteligencia ejecutiva: crear dashboards interactivos y obtener insights estratégicos sin necesidad de ser experto en estadística.</p>
+            </div>
+
+            <div class="sessions-grid">
+              <!-- Sesión 11 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 11 · 2 Horas</span>
+                  <span class="pill-type">Dashboards & KPIs</span>
+                </div>
+                <h4 class="session-name">Dashboards Ejecutivos e Indicadores de Gestión con IA</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li>Crear <strong>dashboards interactivos</strong> en Google Looker Studio / Data Studio conectados a planillas en tiempo real.</li>
+                    <li>Definición y automatización de <strong>KPIs estratégicos</strong>: matrículas, retención, ingresos y productividad.</li>
+                    <li>Usar IA para <strong>interpretar gráficos</strong> y redactar análisis ejecutivos de los resultados automáticamente.</li>
+                    <li>Configuración de <strong>alertas automáticas</strong> cuando un indicador cruza umbrales críticos definidos.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-chart-pie"></i> Looker Studio</span>
+                  <span class="tool-tag"><i class="fa-solid fa-bell"></i> Alertas Automáticas</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Dashboard ejecutivo de KPIs operativos conectado en tiempo real a las planillas de la organización.</span>
+                </div>
+              </div>
+
+              <!-- Sesión 12 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 12 · 2 Horas</span>
+                  <span class="pill-type">IA Predictiva & Forecasting</span>
+                </div>
+                <h4 class="session-name">Análisis Predictivo y Forecasting con IA para la Gestión</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li>Uso de IA para <strong>proyectar tendencias</strong>: matrículas futuras, flujo de caja estimado y estacionalidades.</li>
+                    <li>Análisis de <strong>correlaciones entre variables</strong>: ¿Qué factores impactan más en la retención de alumnos?</li>
+                    <li>Generación de escenarios <em>What-If</em>: simulaciones para anticipar el impacto de decisiones antes de ejecutarlas.</li>
+                    <li>Presentación de análisis predictivo ante el directorio de manera visual y comprensible.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-crystal-ball"></i> Forecasting IA</span>
+                  <span class="tool-tag"><i class="fa-solid fa-chart-line"></i> Análisis Predictivo</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Informe de proyección de matrículas y flujo de caja para los próximos 6 meses con análisis IA.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEMANA 7 -->
+          <div class="week-block" id="week-7" data-week-index="7" data-month="2">
+            <div class="week-header-bar">
+              <div class="w-badge-tag expert"><i class="fa-solid fa-calendar-check"></i> MES 2 · SEMANA 7 (4 HRS · Sesiones 13 & 14)</div>
+              <h3>Ciberseguridad, Privacidad de Datos y Uso Ético de la IA Corporativa</h3>
+              <p>Blindar los datos corporativos y personales: políticas de seguridad, anonimización, marco regulatorio y gobernanza del uso de IA en la organización.</p>
+            </div>
+
+            <div class="sessions-grid">
+              <!-- Sesión 13 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 13 · 2 Horas</span>
+                  <span class="pill-type">Ciberseguridad & Privacidad</span>
+                </div>
+                <h4 class="session-name">Ciberseguridad, Privacidad y Uso Ético Corporativo de la IA</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
+                  <ul class="learning-points">
+                    <li><strong>Matriz de Sensibilidad de Datos:</strong> Semáforo de qué información es segura y qué datos personales o financieros jamás subir a modelos de IA.</li>
                     <li>Configuración de cuentas para desactivar el entrenamiento de modelos públicos con datos corporativos (Opt-Out).</li>
                     <li>Técnicas de <strong>Anonimización y Ofuscación</strong> rápida antes de enviar consultas a la nube.</li>
-                    <li>Políticas de derechos de autor, licencias y marco regulatorio vigente para organizaciones.</li>
+                    <li>Políticas de derechos de autor, licencias y marco regulatorio vigente (Ley 19.628 y GDPR) para organizaciones.</li>
                   </ul>
                 </div>
 
@@ -644,36 +900,105 @@
 
                 <div class="session-deliverable">
                   <i class="fa-solid fa-folder-check"></i>
-                  <span><strong>Entregable Práctico:</strong> Decálogo de Buenas Prácticas y Ciberseguridad de IA para el equipo de trabajo.</span>
+                  <span><strong>Entregable Práctico:</strong> Política de Uso Ético de IA y Decálogo de Ciberseguridad personalizado para la organización.</span>
                 </div>
               </div>
 
-              <!-- Sesión 8 -->
-              <div class="session-card highlight-evaluation">
+              <!-- Sesión 14 -->
+              <div class="session-card">
                 <div class="session-top">
-                  <span class="session-num">Sesión 8 · 2 Horas</span>
-                  <span class="pill-type gold">Reto Final Integrado</span>
+                  <span class="session-num">Sesión 14 · 2 Horas</span>
+                  <span class="pill-type">Gobernanza & Estrategia IA</span>
                 </div>
-                <h4 class="session-name">Taller Práctico Integrado y Evaluación Operativa</h4>
+                <h4 class="session-name">Gobernanza de IA, Estrategia de Adopción Institucional y Marco Regulatorio</h4>
                 
                 <div class="session-what-learn">
-                  <div class="sub-label"><i class="fa-solid fa-trophy"></i> Dinámica del Reto en Tiempo Real:</div>
+                  <div class="sub-label"><i class="fa-solid fa-bullseye"></i> ¿Qué aprenderá el alumno en esta sesión?</div>
                   <ul class="learning-points">
-                    <li><strong>Caso Simulador en Vivo:</strong> A partir de un audio de reunión directiva y un PDF con 30 requerimientos normativos...</li>
-                    <li>Los alumnos generan: Minuta ejecutiva formal, matriz de tareas en Excel, correo para proveedores y presentación de 4 diapositivas en 60 minutos.</li>
-                    <li>Uso coordinado de sus Custom GPTs y modelos aprendidos.</li>
-                    <li>Feedback individualizado de Renzo Thompson y entrega de <strong>Certificados de Aprobación</strong>.</li>
+                    <li>Diseño de una <strong>Política Institucional de IA</strong>: qué herramientas se aprueban, quién autoriza usos nuevos y cómo se monitorea.</li>
+                    <li>Construcción de un <strong>Roadmap de adopción IA de 12 meses</strong> para la organización con hitos medibles.</li>
+                    <li>Gestión del cambio: cómo comunicar y liderar la adopción de IA sin resistencia interna del equipo.</li>
+                    <li>Tendencias 2025-2026: GPT-5, agentes autónomos, modelos on-premise y el futuro del trabajo administrativo.</li>
                   </ul>
                 </div>
 
                 <div class="session-tools-tags">
-                  <span class="tool-tag"><i class="fa-solid fa-award"></i> Evaluación Formativa</span>
-                  <span class="tool-tag"><i class="fa-solid fa-certificate"></i> Certificación</span>
+                  <span class="tool-tag"><i class="fa-solid fa-sitemap"></i> Gobernanza IA</span>
+                  <span class="tool-tag"><i class="fa-solid fa-road"></i> Roadmap Institucional</span>
                 </div>
 
                 <div class="session-deliverable">
                   <i class="fa-solid fa-folder-check"></i>
-                  <span><strong>Entregable Práctico:</strong> Proyecto de automatización listo para implementación permanente en su puesto.</span>
+                  <span><strong>Entregable Práctico:</strong> Roadmap de adopción de IA de 12 meses con hitos, herramientas aprobadas y métricas de impacto.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEMANA 8 -->
+          <div class="week-block" id="week-8" data-week-index="8" data-month="2">
+            <div class="week-header-bar">
+              <div class="w-badge-tag expert"><i class="fa-solid fa-calendar-check"></i> MES 2 · SEMANA 8 (4 HRS · Sesiones 15 & 16)</div>
+              <h3>Proyecto Final Integrado, Evaluación Operativa y Certificación</h3>
+              <p>Demostrar el dominio total: resolver un caso administrativo completo en tiempo real usando todas las herramientas del programa y recibir la certificación oficial.</p>
+            </div>
+
+            <div class="sessions-grid">
+              <!-- Sesión 15 -->
+              <div class="session-card">
+                <div class="session-top">
+                  <span class="session-num">Sesión 15 · 2 Horas</span>
+                  <span class="pill-type">Taller Integrado</span>
+                </div>
+                <h4 class="session-name">Taller Final: Caso Real Complejo con Todas las Herramientas del Programa</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-trophy"></i> Dinámica del Taller en Tiempo Real:</div>
+                  <ul class="learning-points">
+                    <li><strong>Caso Simulador Nivel 1:</strong> A partir de un audio de reunión directiva y un PDF con 30 requerimientos normativos, generar la documentación completa.</li>
+                    <li>Aplicar en cadena: transcripción → minuta → análisis de riesgos → correo a proveedores → presentación ejecutiva.</li>
+                    <li>Uso coordinado de Custom GPTs, flujos automáticos y herramientas de análisis aprendidas.</li>
+                    <li>Revisión grupal de soluciones y optimización colaborativa de los flujos de trabajo implementados.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-layer-group"></i> Integración Total</span>
+                  <span class="tool-tag"><i class="fa-solid fa-users-gear"></i> Trabajo Colaborativo</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Paquete documental completo: minuta, análisis, correo, presentación y dashboard — generados con IA en tiempo récord.</span>
+                </div>
+              </div>
+
+              <!-- Sesión 16 -->
+              <div class="session-card highlight-evaluation">
+                <div class="session-top">
+                  <span class="session-num">Sesión 16 · 2 Horas</span>
+                  <span class="pill-type gold">Reto Final & Certificación</span>
+                </div>
+                <h4 class="session-name">Evaluación Final, Feedback Individual y Entrega de Certificados</h4>
+                
+                <div class="session-what-learn">
+                  <div class="sub-label"><i class="fa-solid fa-trophy"></i> Dinámica del Reto en Tiempo Real:</div>
+                  <ul class="learning-points">
+                    <li><strong>Reto Final Autónomo:</strong> Cada participante resuelve de forma independiente un caso administrativo completo en 60 minutos con IA.</li>
+                    <li>Evaluación de: velocidad de ejecución, calidad de outputs, uso estratégico de herramientas y seguridad de datos.</li>
+                    <li>Feedback <strong>individualizado y personalizado</strong> de Renzo Thompson para cada participante con plan de mejora continua.</li>
+                    <li>Entrega oficial de <strong>Certificados de Aprobación</strong> y acceso al repositorio permanente de grabaciones y materiales.</li>
+                  </ul>
+                </div>
+
+                <div class="session-tools-tags">
+                  <span class="tool-tag"><i class="fa-solid fa-award"></i> Evaluación Final</span>
+                  <span class="tool-tag"><i class="fa-solid fa-certificate"></i> Certificación Oficial</span>
+                </div>
+
+                <div class="session-deliverable">
+                  <i class="fa-solid fa-folder-check"></i>
+                  <span><strong>Entregable Práctico:</strong> Certificado de Aprobación oficial + Proyecto de automatización implementado permanentemente en el puesto de trabajo.</span>
                 </div>
               </div>
             </div>
@@ -709,8 +1034,8 @@
           <div class="feature-box">
             <div class="feature-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
             <div class="feature-content">
-              <h3>16 Sesiones en Vivo (32 Horas Totales)</h3>
-              <p>Distribuidas en 8 semanas (4 horas pedagógicas semanales). Clases dinámicas, interactivas, con resolución de dudas en directo y relatoría experta de Renzo Thompson.</p>
+              <h3>16 Sesiones en Vivo (32 Horas Cronológicas)</h3>
+              <p>2 clases semanales de 2 horas durante 8 semanas. Clases dinámicas, interactivas, con resolución de dudas en directo y relatoría experta de Renzo Thompson.</p>
             </div>
           </div>
 
@@ -1038,9 +1363,9 @@
           <div class="pricing-card primary-card featured">
             <div class="featured-badge">PROPUESTA COMPLETA RECOMENDADA</div>
             <div class="pricing-header">
-              <span class="pricing-label">PROGRAMA INTENSIVO 32 HORAS</span>
+              <span class="pricing-label">PROGRAMA INTENSIVO 2 MESES (32 HORAS)</span>
               <div class="price-value">$600.000 <span class="currency">CLP</span></div>
-              <p class="price-desc">Inversión total por el equipo completo (3 a 6 participantes) por las 32 horas cronológicas.</p>
+              <p class="price-desc">Inversión total por el equipo completo (3 a 6 participantes) por los 2 meses completos (8 semanas · 16 clases).</p>
             </div>
 
             <div class="pricing-calculator-note">
@@ -1272,13 +1597,13 @@
         <div class="cta-content">
           <span class="cta-badge"><i class="fa-solid fa-rocket"></i> COMIENCE LA TRANSFORMACIÓN</span>
           <h2>¿Listo para Potenciar al Máximo la Eficiencia del Equipo?</h2>
-          <p>Asegure la fecha de inicio para <strong>Octubre 2026</strong> y garantice las credenciales anuales de Google AI Plus para sus colaboradores con la asesoría experta de <strong>Renzo Thompson</strong>.</p>
+          <p>Asegure la fecha de inicio para el programa de <strong>2 Meses (Octubre - Noviembre 2026)</strong> y garantice las credenciales anuales de Google AI Plus para sus colaboradores con la asesoría experta de <strong>Renzo Thompson</strong>.</p>
           <div class="cta-actions">
             <button class="btn btn-primary btn-lg" onclick="abrirModalContacto()">
-              <i class="fa-solid fa-envelope"></i> Confirmar Propuesta y Fechas
+              <i class="fa-solid fa-envelope"></i> Confirmar Propuesta y Fechas (2 Meses)
             </button>
-            <button class="btn btn-secondary btn-lg" onclick="window.print()">
-              <i class="fa-solid fa-print"></i> Imprimir Cotización Formal
+            <button class="btn btn-secondary btn-lg" onclick="descargarPDF()">
+              <i class="fa-solid fa-print"></i> Imprimir Cotización Formal (PDF)
             </button>
           </div>
         </div>
@@ -1295,13 +1620,13 @@
           <span>Capacitación Personalizada en IA · Renzo Thompson</span>
         </div>
         <p>Propuesta elaborada exclusivamente para: <strong>Equipo Directivo y Administrativo</strong></p>
-        <p class="footer-date">Fecha de Emisión: Octubre 2026 · Validez de cotización: 30 días</p>
+        <p class="footer-date">Fecha de Emisión: Octubre 2026 · Período de Ejecución: Octubre - Noviembre 2026 (2 Meses) · Validez: 30 días</p>
       </div>
       <div class="footer-right">
         <div class="quick-links">
           <a href="#resumen">Resumen</a> ·
           <a href="#instructor">Relator</a> ·
-          <a href="#flujo-tiempo">Malla</a> ·
+          <a href="#flujo-tiempo">Malla 2 Meses</a> ·
           <a href="#cotizacion">Costos</a> ·
           <a href="#requisitos">Requisitos</a>
         </div>
@@ -1314,11 +1639,11 @@
   <div class="modal-backdrop" id="modalContacto">
     <div class="modal-window">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-check-to-slot"></i> Formalizar Propuesta de Capacitación</h3>
+        <h3><i class="fa-solid fa-check-to-slot"></i> Formalizar Propuesta de Capacitación (2 Meses)</h3>
         <button class="modal-close" onclick="cerrarModalContacto()">&times;</button>
       </div>
       <div class="modal-body">
-        <p class="modal-intro">Complete los siguientes datos para coordinar las fechas de inicio de <strong>Octubre 2026</strong> con el relator Renzo Thompson y emisión de la orden de compra respectiva.</p>
+        <p class="modal-intro">Complete los siguientes datos para coordinar las fechas de ejecución para el ciclo de <strong>2 Meses (Octubre - Noviembre 2026)</strong> con el relator Renzo Thompson y emisión de la orden de compra respectiva.</p>
         
         <form id="formAprobacion" onsubmit="enviarPropuesta(event)">
           <div class="form-group">

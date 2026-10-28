@@ -119,19 +119,75 @@ function initComparisonTabs() {
 }
 
 /* ==========================================================================
-   2. SWITCHER Y NAVEGADOR DE SEMANAS (PASO A PASO)
+   2. SWITCHER Y NAVEGADOR DE SEMANAS Y MESES (2 MESES / 8 SEMANAS)
    ========================================================================== */
 function initWeekSwitcher() {
-  const buttons = document.querySelectorAll('.week-nav-btn');
+  const monthButtons = document.querySelectorAll('.month-tab-btn');
+  const weekButtons = document.querySelectorAll('.week-nav-btn');
   const weekBlocks = document.querySelectorAll('.week-block');
-  if (!buttons.length || !weekBlocks) return;
+  if (!weekBlocks.length) return;
 
-  buttons.forEach(btn => {
+  // Filtrado por Mes (Mes 1, Mes 2, o Todos)
+  monthButtons.forEach(mBtn => {
+    mBtn.addEventListener('click', () => {
+      monthButtons.forEach(b => b.classList.remove('active'));
+      mBtn.classList.add('active');
+
+      const selectedMonth = mBtn.getAttribute('data-month');
+
+      // Reseteamos el active de los botones de semana
+      weekButtons.forEach(wb => wb.classList.remove('active'));
+
+      if (selectedMonth === 'all') {
+        weekBlocks.forEach(wb => {
+          wb.style.display = 'block';
+        });
+        const viewAllBtn = document.querySelector('.week-nav-btn[data-week="all"]');
+        if (viewAllBtn) viewAllBtn.classList.add('active');
+      } else {
+        weekBlocks.forEach(wb => {
+          if (wb.getAttribute('data-month') === selectedMonth) {
+            wb.style.display = 'block';
+          } else {
+            wb.style.display = 'none';
+          }
+        });
+
+        // Activar el primer botón de semana de ese mes
+        const firstWeekOfSelectedMonth = selectedMonth === '1' ? '1' : '5';
+        const targetWeekBtn = document.querySelector(`.week-nav-btn[data-week="${firstWeekOfSelectedMonth}"]`);
+        if (targetWeekBtn) targetWeekBtn.classList.add('active');
+      }
+
+      // Desplazamiento suave al contenedor
+      const curriculumWrapper = document.getElementById('curriculumWrapper');
+      if (curriculumWrapper) {
+        const yOffset = -120;
+        const y = curriculumWrapper.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Filtrado por Semana Individual
+  weekButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
+      weekButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const selectedWeek = btn.getAttribute('data-week');
+      const selectedMonth = btn.getAttribute('data-month');
+
+      // Sincronizar tab de mes
+      if (selectedMonth && selectedMonth !== 'all') {
+        monthButtons.forEach(mb => {
+          mb.classList.toggle('active', mb.getAttribute('data-month') === selectedMonth);
+        });
+      } else if (selectedWeek === 'all') {
+        monthButtons.forEach(mb => {
+          mb.classList.toggle('active', mb.getAttribute('data-month') === 'all');
+        });
+      }
 
       if (selectedWeek === 'all') {
         weekBlocks.forEach(wb => {
@@ -147,7 +203,7 @@ function initWeekSwitcher() {
         });
       }
 
-      // Smooth scroll toward the week block if not in viewport
+      // Smooth scroll hacia el bloque de semana
       const targetElement = document.getElementById(selectedWeek === 'all' ? 'week-1' : `week-${selectedWeek}`);
       if (targetElement) {
         const yOffset = -120;
@@ -295,3 +351,49 @@ function enviarPropuesta(event) {
 window.abrirModalContacto = abrirModalContacto;
 window.cerrarModalContacto = cerrarModalContacto;
 window.enviarPropuesta = enviarPropuesta;
+
+/* ==========================================================================
+   7. GESTIÓN DE IMPRESIÓN Y DESCARGA DE PDF COMPLETO (2 MESES)
+   ========================================================================== */
+function prepararImpresionPDF() {
+  // Asegurar que las 8 semanas y 16 sesiones se muestren completas en el PDF
+  const weekBlocks = document.querySelectorAll('.week-block');
+  weekBlocks.forEach(wb => {
+    wb.style.display = 'block';
+  });
+}
+
+function restaurarDespuesDeImpresion() {
+  const activeMonthBtn = document.querySelector('.month-tab-btn.active');
+  const activeWeekBtn = document.querySelector('.week-nav-btn.active');
+  const weekBlocks = document.querySelectorAll('.week-block');
+
+  if (activeMonthBtn && activeMonthBtn.getAttribute('data-month') !== 'all') {
+    const selectedMonth = activeMonthBtn.getAttribute('data-month');
+    weekBlocks.forEach(wb => {
+      wb.style.display = (wb.getAttribute('data-month') === selectedMonth) ? 'block' : 'none';
+    });
+  } else if (activeWeekBtn && activeWeekBtn.getAttribute('data-week') !== 'all') {
+    const selectedWeek = activeWeekBtn.getAttribute('data-week');
+    weekBlocks.forEach(wb => {
+      wb.style.display = (wb.getAttribute('data-week-index') === selectedWeek) ? 'block' : 'none';
+    });
+  } else {
+    weekBlocks.forEach(wb => {
+      wb.style.display = 'block';
+    });
+  }
+}
+
+window.addEventListener('beforeprint', prepararImpresionPDF);
+window.addEventListener('afterprint', restaurarDespuesDeImpresion);
+
+function descargarPDF() {
+  prepararImpresionPDF();
+  setTimeout(() => {
+    window.print();
+  }, 100);
+}
+
+window.descargarPDF = descargarPDF;
+
